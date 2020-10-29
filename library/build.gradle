@@ -1,6 +1,5 @@
-plugins {
-    id 'com.android.library'
-}
+apply plugin: 'com.android.library'
+apply plugin: 'com.novoda.bintray-release'
 
 android {
     compileSdkVersion 30
@@ -26,6 +25,15 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+}
+
+publish {
+    userOrg = 'leejunj'
+    groupId = 'com.leejunj'
+    artifactId = 'prism'
+    publishVersion = '1.0.0'
+    desc = 'An App ThemeManager'
+    website = 'https://github.com/leejunj/prism'
 }
 
 dependencies {

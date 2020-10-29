@@ -1,4 +1,4 @@
-package com.leejunj.prism;
+package com.leejunj.prism.app;
 
 import androidx.appcompat.app.AppCompatActivity;
 
