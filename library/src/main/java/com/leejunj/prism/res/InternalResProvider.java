@@ -1,5 +1,7 @@
 package com.leejunj.prism.res;
 
+import android.graphics.drawable.Drawable;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,4 +39,26 @@ public class InternalResProvider {
             return false;
         }
     }
+
+    //- - - - - - - - - - - - - - - - - - - - - -
+
+    private SkinType currentSkinType;
+
+    SkinType getSkinType() {
+        return currentSkinType;
+    }
+
+    void setSkinType(SkinType type) {
+        this.currentSkinType = type;
+    }
+
+    //-----------以上是皮肤注册/注销，以下是对应资源查询-----------------
+
+//    int getColor() {
+//
+//    }
+//
+//    Drawable getDrawable() {
+//
+//    }
 }
