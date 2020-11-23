@@ -1,5 +1,6 @@
 package com.leejunj.prism.engine;
 
+import android.app.Application;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
@@ -19,7 +20,9 @@ import androidx.annotation.DrawableRes;
  */
 public interface SkinEngine {
 
-    void build(Context context, String packagePath);
+    void build(Application application);
+
+    boolean markActivity(Context context);
 
     View onCreateView(String name, Context context, AttributeSet attrs);
 

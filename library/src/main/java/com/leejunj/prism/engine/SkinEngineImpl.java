@@ -1,6 +1,7 @@
 package com.leejunj.prism.engine;
 
 import android.app.Activity;
+import android.app.Application;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 
 import com.leejunj.prism.AttrType;
 import com.leejunj.prism.SkinConfig;
+import com.leejunj.prism.SkinManager;
 import com.leejunj.prism.item.OnSkinChangedListener;
 import com.leejunj.prism.item.SkinAttr;
 import com.leejunj.prism.item.SkinItem;
@@ -25,6 +27,7 @@ import java.util.Map;
 import java.util.WeakHashMap;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 /**
  * <P>author : Leejunj<P>
@@ -36,8 +39,25 @@ public class SkinEngineImpl implements SkinEngine {
     private Map<Context, Map<View, SkinItem>> skinItems = new WeakHashMap<>();
 
     @Override
-    public void build(Context context, String packagePath) {
-        ResProviderWrapper.getInstance().init(context, packagePath);
+    public void build(Application application) {
+        ResProviderWrapper.getInstance().init(application, application.getPackageName());
+    }
+
+    @Override
+    public boolean markActivity(Context context) {
+        LayoutInflater layoutInflater = LayoutInflater.from(context);
+        if (layoutInflater.getFactory() == null) {
+            layoutInflater.setFactory(new LayoutInflater.Factory() {
+                @Nullable
+                @Override
+                public View onCreateView(@NonNull String s, @NonNull Context context, @NonNull AttributeSet attributeSet) {
+                    return SkinManager.getInstance().onCreateView(s, context, attributeSet);
+                }
+            });
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
@@ -149,6 +169,7 @@ public class SkinEngineImpl implements SkinEngine {
         View view = null;
         try {
             if (-1 == name.indexOf('.')) {  //TODO:研究下为什么不拆开时第一Activity的Button和TextView会抛NoClass
+                //下面的三个前缀来自系统内部类 PhoneLayoutInflater.sClassPrefixList
                 if ("View".equals(name)) {
                     view = LayoutInflater.from(context).createView(name, "android.view.", attrs);
                 }

@@ -1,6 +1,7 @@
 package com.leejunj.prism.app;
 
 import android.app.Application;
+import android.util.Log;
 
 import com.leejunj.prism.SkinManager;
 import com.leejunj.prism.type.SkinTypeSuffix;
@@ -15,7 +16,7 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        SkinManager.getInstance().build(getApplicationContext(), "com.leejunj.prism.app");
+        SkinManager.getInstance().build(this);
         SkinManager.getInstance().registerSkin(new SkinTypeSuffix("_skin1"));
     }
 }

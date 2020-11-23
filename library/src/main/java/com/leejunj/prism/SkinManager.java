@@ -1,5 +1,6 @@
 package com.leejunj.prism;
 
+import android.app.Application;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
@@ -35,11 +36,14 @@ public class SkinManager {
 
     /**
      * 使用前必须调用方法
-     * @param context 用于构筑内部{@link android.content.res.Resources}对象，不会保留引用，避免内存泄露
-     * @param packagePath  应用包名
+     * @param application 用于构筑内部{@link android.content.res.Resources}对象，不会保留引用，避免内存泄露
      */
-    public void build(Context context, String packagePath) {
-        engine.build(context, packagePath);
+    public void build(Application application) {
+        engine.build(application);
+    }
+
+    public boolean markActivity(Context context) {
+        return engine.markActivity(context);
     }
 
     /**
