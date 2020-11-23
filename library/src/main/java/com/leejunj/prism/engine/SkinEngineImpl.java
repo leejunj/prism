@@ -146,9 +146,21 @@ public class SkinEngineImpl implements SkinEngine {
     //---------------------------------------
 
     private static View createView(@NonNull String name, @NonNull Context context, @NonNull AttributeSet attrs) {
-        View view;
+        View view = null;
         try {
-            view = LayoutInflater.from(context).createView(name, null, attrs);
+            if (-1 == name.indexOf('.')) {  //TODO:研究下为什么不拆开时第一Activity的Button和TextView会抛NoClass
+                if ("View".equals(name)) {
+                    view = LayoutInflater.from(context).createView(name, "android.view.", attrs);
+                }
+                if (view == null) {
+                    view = LayoutInflater.from(context).createView(name, "android.widget.", attrs);
+                }
+                if (view == null) {
+                    view = LayoutInflater.from(context).createView(name, "android.webkit.", attrs);
+                }
+            } else {
+                view = LayoutInflater.from(context).createView(name, null, attrs);
+            }
         } catch (Exception e) {
             view = null;
         }
