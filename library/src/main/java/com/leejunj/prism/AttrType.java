@@ -2,10 +2,9 @@ package com.leejunj.prism;
 
 /**
  * <P>author : Leejunj<P>
- * <p>date : 2020/11/17<p>
+ * <p>date : 2020/11/19<p>
  * <p>description : <p>
  */
-public interface SkinEngine {
-
-
+public enum AttrType {
+    background, textColor, src
 }

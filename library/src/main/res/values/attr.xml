@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <attr name="skin_changeable">
+        <flag name="background" value="0x01" />
+        <flag name="textColor" value="0x02" />
+        <flag name="src" value="0x04" />
+    </attr>
+</resources>

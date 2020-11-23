@@ -1,4 +1,4 @@
-package com.leejunj.prism.res;
+package com.leejunj.prism.type;
 
 /**
  * <P>author : Leejunj<P>
