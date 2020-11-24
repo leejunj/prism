@@ -75,12 +75,12 @@ public class SkinManager {
 
     //---------------------动态标记管理----------------------
 
-    public void addView(Context activity, View target, int attrValueResId, AttrType type) {
-        engine.addView(activity, target, attrValueResId, type);
+    public void addView(View target, int attrValueResId, AttrType type) {
+        engine.addView(target, attrValueResId, type);
     }
 
-    public void addView(Context activity, View view, OnSkinChangedListener listener) {
-        engine.addView(activity, view, listener);
+    public void addView(View view, OnSkinChangedListener listener) {
+        engine.addView(view, listener);
     }
 
     public void removeViews(Context context) {

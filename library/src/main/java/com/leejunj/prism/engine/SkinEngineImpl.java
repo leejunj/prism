@@ -37,9 +37,11 @@ import androidx.annotation.Nullable;
 public class SkinEngineImpl implements SkinEngine {
 
     private Map<Context, Map<View, SkinItem>> skinItems = new WeakHashMap<>();
+    private Application mApplication;
 
     @Override
     public void build(Application application) {
+        this.mApplication = application;
         ResProviderWrapper.getInstance().init(application, application.getPackageName());
     }
 
@@ -84,10 +86,10 @@ public class SkinEngineImpl implements SkinEngine {
     }
 
     @Override
-    public void addView(Context activity, View target, int attrValueResId, AttrType type) {
+    public void addView(View target, int attrValueResId, AttrType type) {
 
         int id = attrValueResId;
-        Resources res = activity.getResources();
+        Resources res = mApplication.getResources();
         String resName = res.getResourceEntryName(id);  //属性值名字，如white_mcc
         String typeName = res.getResourceTypeName(id);
 
@@ -97,17 +99,17 @@ public class SkinEngineImpl implements SkinEngine {
         if (ResProviderWrapper.getInstance().getCurrentSkinType() != null) {
             skinItem.change();
         }
-        addSkinItem(activity, skinItem);
+        addSkinItem(target.getContext(), skinItem);
     }
 
     @Override
-    public void addView(Context activity, View view, OnSkinChangedListener listener) {
+    public void addView(View view, OnSkinChangedListener listener) {
 
         SkinItem skinItem = new SkinItem(view, listener);
         if (ResProviderWrapper.getInstance().getCurrentSkinType() != null) {
             skinItem.change();
         }
-        addSkinItem(activity, skinItem);
+        addSkinItem(view.getContext(), skinItem);
     }
 
     @Override

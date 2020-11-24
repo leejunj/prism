@@ -26,9 +26,9 @@ public interface SkinEngine {
 
     View onCreateView(String name, Context context, AttributeSet attrs);
 
-    void addView(Context activity, View target, int attrValueResId, AttrType type);
+    void addView(View target, int attrValueResId, AttrType type);
 
-    void addView(Context activity, View view, OnSkinChangedListener listener);
+    void addView(View view, OnSkinChangedListener listener);
 
     boolean registerSkin(SkinType skinType);
 
